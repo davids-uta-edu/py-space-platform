@@ -147,7 +147,8 @@ class TaskMonitor(object):
 
         """
 
-        headers = {"accept-wait": self.wait_time}
+        # headers = {"accept-wait": self.wait_time}
+        headers = {"accept-wait": str(self.wait_time)}
         response = self._rest_end_point.post(self.next_msg_url, headers, body=None)
         next_msg = response.headers["msg-consume-next"]
         if len(next_msg) > 0:

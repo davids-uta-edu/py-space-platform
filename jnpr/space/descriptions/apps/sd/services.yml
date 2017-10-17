@@ -1,0 +1,13 @@
+---
+services:
+    device_management:
+        service_name: 'device-management'
+        url: '/api/juniper/sd/device-management'
+    job_management:
+        service_name: 'job-management'
+        url: '/api/juniper/sd/job-management'
+    fwpolicy_management:
+        service_name: 'fwpolicy-management'
+        url: '/api/juniper/sd/fwpolicy-management'
+
+...

@@ -8,4 +8,8 @@ applications:
         application_name: 'Service Insight'
         url: '/api/juniper/serviceinsight'
 
+    sd:
+        application_name: 'Security Director'
+        url: '/api/juniper/sd'
+
 ...

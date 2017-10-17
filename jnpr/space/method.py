@@ -133,6 +133,13 @@ class Method(base._SpaceBase):
             if schedule is not None:
                 url = '&schedule='.join([url, schedule])
 
+        if 'qry_param' in kwargs:
+            if (url.find('?') == -1) :
+                url = '?'.join([url, kwargs['qry_param']])
+            else :
+                url = '&'.join([url, kwargs['qry_param']])
+
+
         headers = {}
         if content_type is not None:
             headers['content-type'] = content_type

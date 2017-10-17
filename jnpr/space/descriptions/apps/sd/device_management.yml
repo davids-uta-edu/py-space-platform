@@ -1,0 +1,48 @@
+---
+collections:
+
+    devices:
+        xml_name: 'devices'
+        media_type: 'application/vnd.juniper.sd.device-management.devices+xml;q="0.01";version="1"'
+        url: '/api/juniper/sd/device-management/devices'
+        resource_type: 'sd.device_management.device'
+
+resources:
+    devices_certificate:
+        xml_name: 'devices-certificate'
+        media_type: 'application/vnd.juniper.sd.device-management.certificates-request+xml;version="2";2;charset="UTF-8"'
+        collection_name: 'devices-certificates'
+        service_url: '/api/juniper/sd/device-management'
+
+    device:
+        xml_name: 'device'
+        media_type: 'application/vnd.juniper.sd.device-management.device+xml;version="1";q="0.01"'
+        collection_name: 'devices'
+        service_url: '/api/juniper/sd/device-management'
+        collections:
+            zones:
+                name: 'Zone'
+                xml_name: 'Zone'
+                media_type: 'application/vnd.juniper.sd.device-management.zones+xml;version=1;q=0.01'
+            interfaces:
+                name: 'Interfaces'
+                xml_name: 'Interfaces'
+                media_type: 'application/vnd.juniper.sd.device-management.interfaces+xml;q="0.01";version="1"'
+            routing_instances:
+                name: 'routing-instances'
+                xml_name: 'routing-instances'
+                media_type: 'application/vnd.juniper.sd.device-management.routing-instances+xml;q="0.01";version="1"'
+methods:
+    update_devices:
+        name: 'update-devices'
+        request_type: 'application/vnd.juniper.sd.device-management.update-devices+xml;version=1;charset=UTF-8'
+        request_template: 'sd_update_devices.tpl'
+        response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
+    devices_certificates:
+        xml_name: 'devices-certificates'
+        media_type: 'application/vnd.juniper.sd.device-management.certificates-requests+xml;q="0.01";version="1"'
+        request_template: 'sd_devices_certificates.tpl'
+        response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
+...

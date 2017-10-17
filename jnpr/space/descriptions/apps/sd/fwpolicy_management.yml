@@ -1,0 +1,114 @@
+---
+collections:
+
+    custom_objects:
+        xml_name: 'custom-objects'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.custom-objects+xml;q="0.01";version="1"'
+        url: '/api/juniper/sd/fwpolicy-management/custom-objects'
+        resource_type: 'sd.fwpolicy_management.custom_object'
+
+    custom_columns:
+        xml_name: 'custom-columns'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.custom-columns+xml;q="0.01";version="1"'
+        url: '/api/juniper/sd/fwpolicy-management/custom-columns'
+        resource_type: 'sd.fwpolicy_management.custom_column'
+
+    firewall_rules:
+        xml_name: 'firewall-rules'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-rules+xml;q="0.01";version="1"'
+        url: '/api/juniper/sd/fwpolicy-management/firewall-rules'
+        resource_type: 'sd.fwpolicy_management.firewall_rule'
+
+    policy_profiles:
+        xml_name: 'policy-profiles'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.policy-profiles+xml;q="0.01";version="1"'
+        url: '/api/juniper/sd/fwpolicy-management/policy-profiles'
+        resource_type: 'sd.fwpolicy_management.policy_profile'
+
+    firewall_policies:
+        xml_name: 'firewall-policies'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-policies+xml;q="0.01";version="1"'
+        # response_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-policy+xml;q="0.01";version="1"'
+        url: '/api/juniper/sd/fwpolicy-management/firewall-policies'
+        resource_type: 'sd.fwpolicy_management.firewall_policy'
+
+resources:
+    firewall_rule:
+        xml_name: 'firewall-rule'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-rule+xml;q="0.01";version="1"'
+        collection_name: 'firewall_rules'
+        service_url: '/api/juniper/sd/fwpolicy-management'
+
+    policy_profile:
+        xml_name: 'policy-profile'
+        # media_type: 'application/vnd.juniper.sd.fwpolicy-management.policy-profile+xml;q="0.01";version="1"'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.policy-profile+xml;version=1;charset=UTF-8'
+        collection_name: 'policy_profiles'
+        service_url: '/api/juniper/sd/fwpolicy-management'
+
+    custom_object:
+        xml_name: 'custom-object'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.custom-object+xml;q="0.01";version="1"'
+        collection_name: 'custom_objects'
+        service_url: '/api/juniper/sd/fwpolicy-management'
+
+    custom_column:
+        xml_name: 'custom-column'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.custom-column+xml;q="0.01";version="1"'
+        collection_name: 'custom_columns'
+        service_url: '/api/juniper/sd/fwpolicy-management'
+
+    firewall_policy:
+        xml_name: 'firewall-policy'
+        media_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-policy+xml;version=1;charset=UTF-8'
+        collection_name: 'firewall_policies'
+        service_url: '/api/juniper/sd/fwpolicy-management'
+        collections:
+            firewall_rules:
+                name: 'rules'
+                xml_name: 'rules'
+                media_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-rules+xml;q="0.01";version="1"'
+                # resource_type: 'sd.fwpolicy_management.firewall_rule'
+            devices:
+                name: 'devices'
+                xml_name: 'devices'
+                # TODO: media_type with char set is not working for this URL
+                # media_type: 'application/vnd.juniper.sd.fwpolicy-management.devices+xml;version=1;charset=UTF-8'
+                # resource_type: 'sd.device_management.device'
+        methods:
+            lock:
+                name: 'lock'
+                # request_type: 'application/vnd.juniper.sd.lock-management.object-lock+xml;version=1;q=0.01'
+                request_template: 'sd_fwp_lock.tpl'
+                response_type: 'application/vnd.juniper.sd.lock-management.object-lock+xml;version=1;q=0.01'
+            unlock:
+                name: 'unlock'
+                # request_type: 'application/vnd.juniper.sd.lock-management.object-lock+xml;version=1;q=0.01'
+                request_template: 'sd_fwp_unlock.tpl'
+                response_type: 'application/vnd.juniper.sd.lock-management.object-lock+xml;version=1;q=0.01'
+            assign_devices:
+                name: 'assign-devices'
+                request_type: 'application/vnd.juniper.sd.fwpolicy-management.assign-devices+xml;version=1;charset=UTF-8'
+                request_template: 'sd_fwp_assign_devices.tpl'
+                # response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
+methods:
+    modify_rules:
+        name: 'modify-rules'
+        request_type: 'application/vnd.juniper.sd.fwpolicy-management.modify-rules+xml;version=1;charset=UTF-8'
+        request_template: 'sd_fwp_modify_rules.tpl'
+        # response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
+    publish:
+        name: 'publish'
+        request_type: 'application/vnd.juniper.sd.fwpolicy-management.publish+xml;version=1;charset=UTF-8'
+        request_template: 'sd_fwp_publish.tpl'
+        response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
+    publish_update:
+        name: 'publish?update=true'
+        request_type: 'application/vnd.juniper.sd.fwpolicy-management.publish+xml;version=1;charset=UTF-8'
+        request_template: 'sd_fwp_publish.tpl'
+        response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
+...
