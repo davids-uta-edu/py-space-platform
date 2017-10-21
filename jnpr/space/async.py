@@ -240,6 +240,9 @@ class TaskMonitor(object):
         num_consecutive_attempts = 0
         task_results = []
 
+        tmp_task_id_list = []
+        for task_id in task_id_list:
+            tmp_task_id_list.append(str(task_id))
         while len(task_results) < len(task_id_list):
             message = self.pull_message()
             if message is None:
@@ -254,7 +257,12 @@ class TaskMonitor(object):
 
             if message.taskId in task_id_list:
                 if self._task_is_done(message):
-                    task_results.append(self.get_final_progress_update(message))
+                    try :
+                        tmp_task_id_list.remove(str(message.taskId))
+                        task_results.append(self.get_final_progress_update(message))
+                    except Exception as ex :
+                        # task-id is already removed - ignore
+                        pass
 
         return task_results
 
