@@ -27,6 +27,7 @@ from builtins import object
 from pprint import pformat
 from lxml import etree, objectify
 from jinja2 import Environment, PackageLoader
+import json
 
 from jnpr.space import xmlutil, util, base, rest
 
@@ -261,6 +262,62 @@ class Resource(base._SpaceBase):
         #r = response.text
         resp_txt = xmlutil.get_text_from_response(response)
         return xmlutil.xml2obj(resp_txt)
+
+    def get_json(self, attr=None, accept=None):
+        """
+        This is an overloaded method that does two things: If the ``attr``
+        parameter is passed, it returns the corresponding XML attribute from
+        the top level XML data element contained by this resource. If the
+        ``attr`` parameter is not passed, it performs an HTTP GET for
+        this resource and get its current state.
+
+        :param str attr: The name of the XML attribute in the top-level
+            element of the XML state of the resource. Defaults to ``None``.
+
+        :param str accept: This can be used to supply a media-type that must
+            be used as the Accept header in the GET request. This defaults to
+            ``None`` and in this case SpaceEZ will use the media-type modeled
+            in the description file.
+
+        :returns:
+            - Value of the named XML attribute. OR
+            - The current state of this resource fetched from Space and
+              represented as a Python object. You can access the fields of the
+              resource's state directly as attributes of this object.
+
+        :raises: ``jnpr.space.rest.RestException`` if the GET method results in an
+            error response. The exception's ``response`` attribute will have the
+            full response from Space.
+
+        """
+        if attr is not None:
+            return self._get_xml_attr(attr)
+
+        if accept is not None:
+            mtype = accept
+        else:
+            mtype = self._meta_object.get_media_type(None)
+
+        if mtype is not None:
+            if not self._meta_object.retain_charset_in_accept:
+                end = mtype.find(';charset=')
+                if end > 0:
+                    mtype = mtype[0:end]
+            mtype = mtype.replace("xml", "json")
+            headers = {'accept' : mtype}
+        else:
+            headers = {}
+
+        response = self._rest_end_point.get(self.get_href(), headers)
+        if response.status_code != 200:
+            raise rest.RestException("GET failed on %s" % self.get_href(),
+                                     response)
+
+        #r = response.text
+        # resp_txt = xmlutil.get_text_from_response(response)
+        # return xmlutil.xml2obj(resp_txt)
+        data = json.loads(response.content)
+        return data
 
     def put(self, new_val_obj=None, request_body=None,
             accept=None, content_type=None):

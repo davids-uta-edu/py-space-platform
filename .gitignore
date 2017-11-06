@@ -17,3 +17,6 @@ develop-eggs
 .installed.cfg
 lib64
 env
+*.orig
+*.bak*
+.gitignore

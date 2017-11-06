@@ -38,6 +38,12 @@ resources:
         media_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-rule+xml;q="0.01";version="1"'
         collection_name: 'firewall_rules'
         service_url: '/api/juniper/sd/fwpolicy-management'
+        collections:
+            members:
+                name: 'members'
+                xml_name: 'members'
+                media_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-rules+xml;q="0.01";version="1"'
+                resource_type: 'sd.fwpolicy_management.firewall_rule'
 
     policy_profile:
         xml_name: 'policy-profile'
@@ -68,7 +74,7 @@ resources:
                 name: 'rules'
                 xml_name: 'rules'
                 media_type: 'application/vnd.juniper.sd.fwpolicy-management.firewall-rules+xml;q="0.01";version="1"'
-                # resource_type: 'sd.fwpolicy_management.firewall_rule'
+                resource_type: 'sd.fwpolicy_management.firewall_rule'
             devices:
                 name: 'devices'
                 xml_name: 'devices'
