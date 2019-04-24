@@ -73,6 +73,10 @@ resources:
                 name: 'managed-elements'
                 xml_name: 'managed-elements'
                 media_type: 'application/vnd.net.juniper.space.managed-domain.managed-elements-ref+xml;version=1'
+            configlet:
+                name: 'configlet'
+                xml_name: 'configlet'
+                media-type: 'application/vnd.net.juniper.space.device-management.configlet+xml;version=1'
             configurations:
                 name: 'configurations'
                 xml_name: 'configurations'
