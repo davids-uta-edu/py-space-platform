@@ -7,8 +7,6 @@ jnpr/space/test/test.conf
 #Packaging related
 *.egg
 *.egg-info
-*.html
-htmlcov
 dist
 build
 eggs
@@ -22,3 +20,13 @@ env
 *.orig
 *.bak*
 .gitignore
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
