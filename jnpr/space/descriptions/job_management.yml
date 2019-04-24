@@ -19,6 +19,11 @@ resources:
                 name: 'progress-update'
             cancel:
                 name: 'cancel'
+        collections:
+            discovery_job_results:
+                xml_name: 'discovery-job-results'
+                media_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6'
+                resource_type: 'device_management.discovery_job_results'
 
     progress_update:
         xml_name: 'progress-update'

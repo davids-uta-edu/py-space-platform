@@ -38,6 +38,11 @@ collections:
                 response_type: 'application/vnd.net.juniper.space.device-management.get-syslog-events+xml;version=2'
             stop_syslog_events:
                 name: 'stop-syslog-events'
+            discovery_job_results:
+                xml_name: 'discovery-job-results'
+                media_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6'
+                url: '/api/space/device-management/job-instances'
+                resource_type: 'device_management.discovery_job_results'
 
 resources:
     device_discovery_rule:
@@ -108,6 +113,15 @@ resources:
                 name: 'apply-cli-configlet'
                 request_type: 'application/vnd.net.juniper.space.device-management.apply-cli-configlet+xml;version=2;charset=UTF-8'
                 request_template: 'apply_cli_configlet.tpl'
+
+    discovery_job_results:
+        xml_name: 'discovery-job-results'
+        media_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6'
+        collection_name: 'discovery_job_results'
+        service_url: '/api/space/device-management/job-instances'
+        request_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6;charset=UTF-8'
+        request_template: 'config_xpath_post.tpl'
+        response_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6'
 
     raw_config:
         xml_name: 'raw-configuration'
