@@ -161,7 +161,7 @@ class Method(base._SpaceBase):
 
         response = self._rest_end_point.post(url, headers, body)
         if (response.status_code != 202) and (response.status_code != 200):
-            raise rest.RestException("POST failed on %s " % url, response)
+            raise rest.RestException("POST failed on %s %s %s %s" % (url, response, headers, body), response)
 
         try:
             if response.text is not None:
@@ -172,7 +172,7 @@ class Method(base._SpaceBase):
                     src = xmlutil.remove_default_namespace(src)
                 return xmlutil.xml2obj(src)
         except:
-            raise rest.RestException("Failed to parse XML response for %s " % url, response)
+            raise rest.RestException("Failed to parse XML response for %s %s %s %s" % (url, response, headers, body), response)
 
     def get(self, accept=None):
         """Performs a GET corresponding to the Method object.
