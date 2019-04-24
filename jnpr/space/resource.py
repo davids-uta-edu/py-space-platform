@@ -613,6 +613,12 @@ class Resource(base._SpaceBase):
         else:
             return 'No XML data'
 
+    def xml_data_obj(self):
+        """
+        Returns xml_data object
+        """
+        return self._xml_data
+        
     def state(self):
         """
         Prints the XML string into stdout.
