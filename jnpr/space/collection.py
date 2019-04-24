@@ -25,6 +25,7 @@ from __future__ import print_function
 from builtins import str
 from builtins import object
 from lxml import etree
+import json
 
 from jnpr.space import base, xmlutil, rest
 
@@ -193,6 +194,71 @@ class Collection(base._SpaceBase):
                         raise ex
 
         return ResourceList(resource_list)
+
+    def get_json(self, accept=None, filter_=None,
+            domain_id=None, paging=None, sortby=None):
+        """Gets the contained resources of this collection from Space.
+
+        :param str accept: This can be used to supply a media-type that must
+            be used as the Accept header in the GET request. This defaults to
+            ``None`` and in this case SpaceEZ will use the media-type modeled
+            in the description file.
+
+        :param filter_: A filter expression to apply on the collection. This
+            can be given as a dict with name:value pairs to filter with. For
+            example, ``{'name':'user1'}``. Or this can be given as a string
+            which forms a valid filter expression for this collection as per
+            Junos Space API documentation.
+            This parameter defaults to ``None``.
+        :type filter_: str or dict
+
+        :param paging: A paging expression to apply on the collection. This
+            must be given as a dict with entries giving values for ``start``
+            and ``limit`` paging parameters. For example, ``{'start':10,
+            'limit':100}``.
+            This parameter defaults to ``None``.
+        :type paging: dict
+
+        :param sortby: A list of field names to sort the results by.
+            This parameter defaults to ``None``.
+        :type sortby: list of str
+
+        :returns: json body from response
+
+        :raises: ``jnpr.space.rest.RestException`` if the GET method results in an
+            error response. The exception's ``response`` attribute will have the
+            full response from Space.
+
+        """
+        url = self._form_get_url(filter_, domain_id, paging, sortby)
+
+        if accept is not None:
+            mtype = accept
+        else:
+            mtype = self._meta_object.get_media_type(None)
+
+        if mtype is not None:
+            if not self._meta_object.retain_charset_in_accept:
+                end = mtype.find(';charset=')
+                if end > 0:
+                    mtype = mtype[0:end]
+            mtype = mtype.replace("xml", "json")
+            headers = {'accept' : mtype}
+        else:
+            headers = {}
+
+        resource_list = []
+        response = self._rest_end_point.get(url, headers)
+        if response.status_code != 200:
+            if response.status_code == 204:
+                return []
+            raise rest.RestException("GET failed on %s, response: %s" % (url, response), response)
+
+        try: 
+            data = json.loads(response.content)
+            return data
+        except Exception as error:
+            raise rest.RestException("Not able to load json from response: %s %s" % (response, response.content), response)
 
     def _create_named_resource(self, key, meta_object, xml_root):
         """
