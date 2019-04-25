@@ -15,17 +15,17 @@ collections:
                 name: 'exec-disable'
                 request_type: 'application/vnd.net.juniper.space.script-management.exec-disable+xml;version=2;charset=UTF-8'
                 request_template: 'exec_disable_scripts.tpl'
-                response_type: 'application/vnd.net.juniper.space.script-management.exec-disable+xml;version=2'
+                response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
             exec_enable:
                 name: 'exec-enable'
                 request_type: 'application/vnd.net.juniper.space.script-management.exec-enable+xml;version=2;charset=UTF-8'
                 request_template: 'exec_enable_scripts.tpl'
-                response_type: 'application/vnd.net.juniper.space.script-management.exec-enable+xml;version=2'
+                response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
             exec_remove:
                 name: 'exec-remove'
                 request_type: 'application/vnd.net.juniper.space.script-management.exec-remove+xml;version=2;charset=UTF-8'
                 request_template: 'exec_remove_scripts.tpl'
-                response_type: 'application/vnd.net.juniper.space.script-management.exec-remove+xml;version=2'
+                response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
             exec_scripts:
                 name: 'exec-scripts'
                 request_type: 'application/vnd.net.juniper.space.script-management.exec-scripts+xml;version=2;charset=UTF-8'

@@ -7,6 +7,7 @@ jnpr/space/test/test.conf
 #Packaging related
 *.egg
 *.egg-info
+setup.py
 dist
 build
 eggs

@@ -128,7 +128,7 @@ class TaskMonitor(object):
         if response.status_code == 201:
             self.next_msg_url = self._strip_uri(response.headers["msg-consume-next"])
         else:
-            raise Exception("Failed to create message consumer")
+            raise Exception("Failed to create message consumer, response url: %s, code: %s, content: %s" % (url, response.status_code, response.content))
 
     def _strip_uri(self, url):
         """Strips the URL and returns the portion that starts with /api"""
@@ -278,7 +278,10 @@ class TaskMonitor(object):
                 if sub_task.state != "DONE":
                     return False
 
-            return True
+            if message.state == "DONE":
+                return True
+            else:
+                return False
         except AttributeError:
             return False
 

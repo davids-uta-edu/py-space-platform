@@ -21,3 +21,6 @@ import os
 import logging.config
 logging.config.fileConfig(os.path.dirname(os.path.realpath(__file__)) +
                           '/pkg_level_logging.conf')
+
+import urllib3
+urllib3.disable_warnings()
