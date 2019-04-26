@@ -494,7 +494,7 @@ class Resource(base._SpaceBase):
 
         response = self._rest_end_point.post(url, headers, body)
         if (response.status_code != 202) and (response.status_code != 200):
-            raise rest.RestException("POST failed on %s" % url, response)
+            raise rest.RestException("POST failed on %s %s %s %s" % (url, headers, body, response), response)
 
         resp_text = xmlutil.get_text_from_response(response)
         resp_text = xmlutil.cleanup(resp_text)
