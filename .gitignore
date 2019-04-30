@@ -1,9 +1,9 @@
+setup.py
 *.py[cod]
 jnpr/space/test/test.conf
 .project
 .pydevproject
 .DS_Store
-
 #Packaging related
 *.egg
 *.egg-info

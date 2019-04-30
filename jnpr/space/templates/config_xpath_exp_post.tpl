@@ -5,24 +5,24 @@
      - format
         Can be "xml" or "cli"
 #}
-{% if format %}
+{%- if format %}
 
 <expanded-{{format}}-configuration-request>
 <xpath-list>
-{% for X in xpaths %}
+{%- for X in xpaths %}
   <xpath>{{ X }}</xpath>
-{% endfor %}
+{%- endfor %}
 </xpath-list>
 </expanded-{{format}}-configuration-request>
 
-{% else %}
+{%- else %}
 
 <expanded-xml-configuration-request>
 <xpath-list>
-{% for X in xpaths %}
+{%- for X in xpaths %}
   <xpath>{{ X }}</xpath>
-{% endfor %}
+{%- endfor %}
 </xpath-list>
 </expanded-xml-configuration-request>
 
-{% endif %}
+{%- endif %}

@@ -497,7 +497,8 @@ class Resource(base._SpaceBase):
             raise rest.RestException("POST failed on %s %s %s %s" % (url, headers, body, response), response)
 
         resp_text = xmlutil.get_text_from_response(response)
-        resp_text = xmlutil.cleanup(resp_text)
+        if not self._meta_object.keep_xml_escaping:
+            resp_text = xmlutil.cleanup(resp_text)
         if self._meta_object.remove_junos_group:
             resp_text = xmlutil.remove_junos_group(resp_text)
         return xmlutil.xml2obj(resp_text)
@@ -708,6 +709,8 @@ class MetaResource(object):
             if ('service_url' in values) else None
         self.use_uri_for_delete = values['use_uri_for_delete'] \
             if ('use_uri_for_delete' in values) else False
+        self.keep_xml_escaping = values['keep_xml_escaping'] \
+            if ('keep_xml_escaping' in values) else False
         self.remove_junos_group = values['remove_junos_group'] \
             if ('remove_junos_group' in values) else False
         self.collections = {}

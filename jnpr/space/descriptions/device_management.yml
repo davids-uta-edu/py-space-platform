@@ -123,25 +123,6 @@ resources:
         request_template: 'config_xpath_post.tpl'
         response_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6'
 
-    raw_config_old:
-        xml_name: 'raw-configuration'
-        media_type: 'application/vnd.net.juniper.space.device-management.raw-configuration+xml;q=".02";version="3"'
-        collection_name: 'configurations'
-        service_url: '/api/space/device-management'
-        request_type: 'application/vnd.net.juniper.space.device-management.xpath+xml;version=1;charset=UTF-8'
-        request_template: 'config_xpath_post.tpl'
-        response_type: 'application/vnd.net.juniper.space.device-management.raw-configuration+xml;q=".01";version="1"'
-
-    expanded_config_old:
-        xml_name: 'expanded-configuration'
-        media_type: 'application/vnd.net.juniper.space.device-management.expanded-configuration+xml;q=".02";version="3"'
-        collection_name: 'configurations'
-        service_url: '/api/space/device-management'
-        request_type: 'application/vnd.net.juniper.space.device-management.xpath+xml;version=1;charset=UTF-8'
-        request_template: 'config_xpath_post.tpl'
-        response_type: 'application/vnd.net.juniper.space.device-management.expanded-configuration+xml;q=".01";version="1"'
-        remove_junos_group: True
-
     raw_config:
         xml_name: 'raw-configuration'
         media_type: 'application/vnd.net.juniper.space.device-management.raw-xml-configuration+xml;version=5'
@@ -150,6 +131,7 @@ resources:
         request_type: 'application/vnd.net.juniper.space.device-management.raw-xml-configuration-request+xml;version=5;charset=UTF-8'
         request_template: 'config_xpath_raw_post.tpl'
         response_type: 'application/vnd.net.juniper.space.device-management.raw-xml-configuration+xml;version=5'
+        keep_xml_escaping: True
 
     expanded_config:
         xml_name: 'expanded-configuration'
@@ -159,6 +141,7 @@ resources:
         request_type: 'application/vnd.net.juniper.space.device-management.expanded-xml-configuration-request+xml;version=5;charset=UTF-8'
         request_template: 'config_xpath_exp_post.tpl'
         response_type: 'application/vnd.net.juniper.space.device-management.expanded-xml-configuration+xml;version=5'
+        keep_xml_escaping: True
         remove_junos_group: True
 
 methods:
