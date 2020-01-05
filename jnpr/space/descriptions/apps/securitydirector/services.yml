@@ -1,0 +1,78 @@
+---
+services:
+    policy_management:
+        service_name: 'policy-management'
+        url: '/api/juniper/sd/policy-management'
+
+    vpn_management:
+        service_name: 'vpn-management'
+        url: '/api/juniper/sd/vpn-management'
+
+    access_profile_management:
+        service_name: 'access-profile-management'
+        url: '/api/juniper/sd/access-profile-management'
+
+    active_directory_management:
+        service_name: 'active-directory-management'
+        url: '/api/juniper/sd/active-directory-management'
+
+    utm_management:
+        service_name: 'utm-management'
+        url: '/api/juniper/sd/utm-management'
+
+    change_request_management:
+        service_name: 'change-request-management'
+        url: '/api/juniper/sd/change-request-management'
+
+    ips_signature_management:
+        service_name: 'ips-signature-management'
+        url: '/api/juniper/sd/ips-signature-management'
+
+    identity_management:
+        service_name: 'identity-management'
+        url: '/api/juniper/sd/identity-management'
+
+    portset_management:
+        service_name: 'portset-management'
+        url: '/api/juniper/sd/portset-management'
+
+    fwpolicy_management:
+        service_name: 'fwpolicy-management'
+        url: '/api/juniper/sd/fwpolicy-management'
+
+    sslpp:
+        service_name: 'sslpp'
+        url: '/api/juniper/sd/sslpp'
+
+    variable_management:
+        service_name: 'variable-management'
+        url: '/api/juniper/sd/variable-management'
+
+    zoneset_management:
+        service_name: 'zoneset-management'
+        url: '/api/juniper/sd/zoneset-management'
+
+    machine_identity_management:
+        service_name: 'machine-identity-management'
+        url: '/api/juniper/sd/machine-identity-management'
+
+    report_management:
+        service_name: 'report-management'
+        url: '/api/juniper/sd/report-management'
+
+    nat_pool_management:
+        service_name: 'nat-pool-management'
+        url: '/api/juniper/sd/nat-pool-management'
+
+    environment_variable_management:
+        service_name: 'environment-variable-management'
+        url: '/api/juniper/sd/environment-variable-management'
+
+    ssl_proxy_profile_management:
+        service_name: 'ssl-proxy-profile-management'
+        url: '/api/juniper/sd/ssl-proxy-profile-management'
+
+    device_management:
+        service_name: 'device-management'
+        url: '/api/juniper/sd/device-management'
+...
