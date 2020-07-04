@@ -1,5 +1,9 @@
 ---
 services:
+    address_management:
+        service_name: 'address-management'
+        url: '/api/juniper/sd/address-management'
+
     policy_management:
         service_name: 'policy-management'
         url: '/api/juniper/sd/policy-management'

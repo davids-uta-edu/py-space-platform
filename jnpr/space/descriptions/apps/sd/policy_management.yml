@@ -1,0 +1,27 @@
+---
+collections:
+    unused_schemas:
+        xml_name: 'unused-schemas'
+        media_type: 'application/vnd.net.juniper.space.schema-service.unused-schemas+xml;version=2;q=0.02'
+        url: '/api/space/schema-service/unused-schemas'
+        resource_type: 'schema_management.dmi_schema_info'
+
+resources:
+    dmi_schema_info:
+        xml_name: 'dmi-schema-info'
+        collection_name: 'scripts'
+        service_url: '/api/juniper/sd/policy-management/firewall/policies/{policy-id}/rules'
+        methods:
+            deleteFirewallRule:
+                name: 'deleteFirewallRule'
+                request_type: 'application/vnd.juniper.sd.policy-management.firewall.rule+xml;version=2;q=0.02;charset=UTF-8'
+                request_template: 'delete_firewall_rule.tpl'
+                response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
+methods:
+    delete_firewall_rule:
+        name: 'delete-firewall-rule'
+        request_type: 'application/vnd.net.juniper.space.schema-service.delete-schemas+xml;version=2;charset=UTF-8'
+        request_template: 'delete_firewall_rule.tpl'
+        response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+...

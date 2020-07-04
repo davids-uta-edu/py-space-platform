@@ -1,0 +1,28 @@
+---
+collections:
+    addresses:
+        xml_name: 'addresses'
+        media_type: 'application/vnd.juniper.sd.address-management+xml;version=1'
+        url: '/api/juniper/sd/address-management/address-management/addresses'
+        resource_type: 'address_management.addresses'
+
+resources:
+    address:
+        xml_name: 'address'
+        media_type: 'application/vnd.juniper.sd.address-management.address+xml;version=1;q=0.01;charset=UTF-8'
+        collection_name: 'addresses'
+        service_url: '/api/juniper/sd/address-management/address-management/addresses'
+        methods:
+            createAddress:
+                name: 'createAddress'
+                request_type: 'application/vnd.juniper.sd.address-management.address+xml;version=1;charset=UTF-8'
+                request_template: 'sd_create_address.tpl'
+                response_type: 'application/vnd.juniper.sd.address-management.address+xml;version=1'
+            ModifyAddress:
+                name: 'ModifyAddress'
+                request_type: 'application/vnd.juniper.sd.address-management.address+xml;version=1;charset=UTF-8'
+                request_template: 'sd_create_address.tpl'
+                response_type: 'application/vnd.juniper.sd.address-management.address+xml;version=1'
+            DeleteAddresses:
+                name: 'DeleteAddresses'
+...

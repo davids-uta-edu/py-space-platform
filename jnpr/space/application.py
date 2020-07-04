@@ -38,6 +38,9 @@ class Application(base._SpaceBase):
     * Service Insight
       (``/api/juniper/serviceinsight``)
 
+    * Security Director
+      (``/api/juniper/sd``)
+
     """
 
     def __init__(self, rest_end_point, name, values):
