@@ -3,7 +3,6 @@ jnpr/space/test/test.conf
 .project
 .pydevproject
 .DS_Store
-
 #Packaging related
 *.egg
 *.egg-info
@@ -17,3 +16,16 @@ develop-eggs
 .installed.cfg
 lib64
 env
+*.orig
+*.bak*
+.gitignore
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover

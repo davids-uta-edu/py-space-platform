@@ -128,7 +128,7 @@ class TaskMonitor(object):
         if response.status_code == 201:
             self.next_msg_url = self._strip_uri(response.headers["msg-consume-next"])
         else:
-            raise Exception("Failed to create message consumer")
+            raise Exception("Failed to create message consumer, response url: %s, code: %s, content: %s" % (url, response.status_code, response.content))
 
     def _strip_uri(self, url):
         """Strips the URL and returns the portion that starts with /api"""
@@ -147,7 +147,8 @@ class TaskMonitor(object):
 
         """
 
-        headers = {"accept-wait": self.wait_time}
+        # headers = {"accept-wait": self.wait_time}
+        headers = {"accept-wait": str(self.wait_time)}
         response = self._rest_end_point.post(self.next_msg_url, headers, body=None)
         next_msg = response.headers["msg-consume-next"]
         if len(next_msg) > 0:
@@ -212,7 +213,7 @@ class TaskMonitor(object):
         if response.status_code != 200:
             raise Exception("Failed in GET on %s" % job_pu_href)
         response_txt = xmlutil.get_text_from_response(response)
-        response_txt = xmlutil.cleanup(response_txt)
+        #response_txt = xmlutil.cleanup(response_txt)
         return xmlutil.xml2obj(response_txt)
 
     def wait_for_tasks(self, task_id_list):
@@ -239,6 +240,9 @@ class TaskMonitor(object):
         num_consecutive_attempts = 0
         task_results = []
 
+        tmp_task_id_list = []
+        for task_id in task_id_list:
+            tmp_task_id_list.append(str(task_id))
         while len(task_results) < len(task_id_list):
             message = self.pull_message()
             if message is None:
@@ -253,7 +257,12 @@ class TaskMonitor(object):
 
             if message.taskId in task_id_list:
                 if self._task_is_done(message):
-                    task_results.append(self.get_final_progress_update(message))
+                    try :
+                        tmp_task_id_list.remove(str(message.taskId))
+                        task_results.append(self.get_final_progress_update(message))
+                    except Exception as ex :
+                        # task-id is already removed - ignore
+                        pass
 
         return task_results
 
@@ -269,7 +278,10 @@ class TaskMonitor(object):
                 if sub_task.state != "DONE":
                     return False
 
-            return True
+            if message.state == "DONE":
+                return True
+            else:
+                return False
         except AttributeError:
             return False
 

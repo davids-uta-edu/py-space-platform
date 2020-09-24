@@ -11,4 +11,5 @@ applications:
     sd:
         application_name: 'Security Director'
         url: '/api/juniper/sd'
+
 ...

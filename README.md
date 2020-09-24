@@ -1,4 +1,5 @@
-The repo is under active development.  If you take a clone, you are getting the latest, and perhaps not entirely stable code.
+
+This repo is forked from https://github.com/Juniper/py-space-platform.git
 
 ## ABOUT
 SpaceEZ is an open-source Python library to allow easy access to Junos Space REST API services for Python developers. The design of the library closely follows the hierarchical structure of Junos Space REST API and provides minimum learning curve for Python developers to be able to utilize these APIs. This library also strives to minimize:
@@ -22,8 +23,8 @@ You can find working examples using this library under the `examples` package. P
 ## INSTALLATION
 
 ```
-First, clone the repo. (Or download the most recent release)
-> git clone https://github.com/Juniper/py-space-platform.git
+First, clone the forked version of the py-space-platform repo. (Or download the most recent release)
+> git clone https://github.com/Juniper-PS-Automation/py-space-platform.git
 
 For installing in Python 2:
 > sudo python ./py-space-platform/setup.py install

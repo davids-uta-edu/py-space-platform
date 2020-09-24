@@ -1,5 +1,30 @@
 ---
 collections:
+    device_discovery_rules:
+        xml_name: 'device-discovery-rules'
+        media_type: 'application/vnd.net.juniper.space.device-management.device-discovery-rules+xml;version=6'
+        url: '/api/space/device-management/device-discovery-rules'
+        resource_type: 'device_management.device_discovery_rule'
+        methods:
+            add_device_discovery_rule_by_ip_request:
+                name: '/'
+                # request_type: 'application/vnd.net.juniper.space.device-management.add-device-discovery-rule-by-ip-request+xml;version=6;charset=UTF-8'
+                # request_type: 'application/vnd.net.juniper.space.device-management.add-device-discovery-rule-by-hostname-request+xml;version=6;charset=UTF-8'
+                request_type: 'application/vnd.net.juniper.space.device-management.add-device-discovery-rule-by-ip-hostname-request+xml;version=6;charset=UTF-8'
+                # request_template: 'add_ddr_by_ip_request.tpl'
+                request_template: 'add_ddr_by_host_name_request.tpl'
+                response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+            add_device_discovery_rule_by_host_name_request:
+                name: ''
+                request_type: 'application/vnd.net.juniper.space.device-management.add-device-discovery-rule-by-host-name-request+xml;version=6;charset=UTF-8'
+                request_template: 'add_ddr_by_host_name_request.tpl'
+                response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+            add_device_discovery_rule_by_ip_hostname_request:
+                name: ''
+                request_type: 'application/vnd.net.juniper.space.device-management.add-device-discovery-rule-by-ip-hostname-request+xml;version=6;charset=UTF-8'
+                request_template: 'add_ddr_by_ip_hostname_request.tpl'
+                response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
     devices:
         xml_name: 'devices'
         media_type: 'application/vnd.net.juniper.space.device-management.devices+xml;version=1'
@@ -13,8 +38,20 @@ collections:
                 response_type: 'application/vnd.net.juniper.space.device-management.get-syslog-events+xml;version=2'
             stop_syslog_events:
                 name: 'stop-syslog-events'
+            discovery_job_results:
+                xml_name: 'discovery-job-results'
+                media_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6'
+                url: '/api/space/device-management/job-instances'
+                resource_type: 'device_management.discovery_job_results'
 
 resources:
+    device_discovery_rule:
+        xml_name: 'device-discovery-rule'
+        media_type: 'application/vnd.net.juniper.space.device-management.device-discovery-rule+xml;version=6'
+        collection_name: 'device_discovery_rules'
+        service_url: '/api/space/device-management'
+        use_uri_for_delete: true
+
     device:
         xml_name: 'device'
         media_type: 'application/vnd.net.juniper.space.device-management.device+xml;version=1;charset=UTF-8'
@@ -41,6 +78,10 @@ resources:
                 name: 'managed-elements'
                 xml_name: 'managed-elements'
                 media_type: 'application/vnd.net.juniper.space.managed-domain.managed-elements-ref+xml;version=1'
+            configlet:
+                name: 'configlet'
+                xml_name: 'configlet'
+                media-type: 'application/vnd.net.juniper.space.device-management.configlet+xml;version=1'
             configurations:
                 name: 'configurations'
                 xml_name: 'configurations'
@@ -73,23 +114,34 @@ resources:
                 request_type: 'application/vnd.net.juniper.space.device-management.apply-cli-configlet+xml;version=2;charset=UTF-8'
                 request_template: 'apply_cli_configlet.tpl'
 
+    discovery_job_results:
+        xml_name: 'discovery-job-results'
+        media_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6'
+        collection_name: 'discovery_job_results'
+        service_url: '/api/space/device-management/job-instances'
+        request_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6;charset=UTF-8'
+        request_template: 'config_xpath_post.tpl'
+        response_type: 'application/vnd.net.juniper.space.device-management.discovery-job-results+xml;version=6'
+
     raw_config:
         xml_name: 'raw-configuration'
-        media_type: 'application/vnd.net.juniper.space.device-management.raw-configuration+xml;q=".02";version="3"'
+        media_type: 'application/vnd.net.juniper.space.device-management.raw-xml-configuration+xml;version=5'
         collection_name: 'configurations'
         service_url: '/api/space/device-management'
-        request_type: 'application/vnd.net.juniper.space.device-management.xpath+xml;version=1;charset=UTF-8'
-        request_template: 'config_xpath_post.tpl'
-        response_type: 'application/vnd.net.juniper.space.device-management.raw-configuration+xml;q=".01";version="1"'
+        request_type: 'application/vnd.net.juniper.space.device-management.raw-xml-configuration-request+xml;version=5;charset=UTF-8'
+        request_template: 'config_xpath_raw_post.tpl'
+        response_type: 'application/vnd.net.juniper.space.device-management.raw-xml-configuration+xml;version=5'
+        keep_xml_escaping: True
 
     expanded_config:
         xml_name: 'expanded-configuration'
-        media_type: 'application/vnd.net.juniper.space.device-management.expanded-configuration+xml;q=".02";version="3"'
+        media_type: 'application/vnd.net.juniper.space.device-management.expanded-xml-configuration-request+xml;version=5'
         collection_name: 'configurations'
         service_url: '/api/space/device-management'
-        request_type: 'application/vnd.net.juniper.space.device-management.xpath+xml;version=1;charset=UTF-8'
-        request_template: 'config_xpath_post.tpl'
-        response_type: 'application/vnd.net.juniper.space.device-management.expanded-configuration+xml;q=".01";version="1"'
+        request_type: 'application/vnd.net.juniper.space.device-management.expanded-xml-configuration-request+xml;version=5;charset=UTF-8'
+        request_template: 'config_xpath_exp_post.tpl'
+        response_type: 'application/vnd.net.juniper.space.device-management.expanded-xml-configuration+xml;version=5'
+        keep_xml_escaping: True
         remove_junos_group: True
 
 methods:
@@ -97,10 +149,22 @@ methods:
         name: 'discover-devices'
         request_type: 'application/vnd.net.juniper.space.device-management.discover-devices+xml;version=2;charset=UTF-8'
         request_template: 'discover_devices.tpl'
-        response_type: 'application/vnd.net.juniper.space.device-management.discover-devices+xml;version=2'
+        # response_type: 'application/vnd.net.juniper.space.device-management.discover-devices+xml;version=2'
+        response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
     change_device_credentials:
         name: 'change-device-credentials'
         request_type: 'application/vnd.net.juniper.space.device-management.change-credentials-request+xml;version=4;charset=UTF-8'
         request_template: 'change_device_credentials.tpl'
         response_type: 'application/vnd.net.juniper.space.device-management.change-credentials-request+xml;version=4'
+    delete_device_discovery_rules:
+        name: 'delete-device-discovery-rules'
+        request_type: 'application/vnd.net.juniper.space.device-management.delete-device-discovery-rules-request+xml;version=6;charset=UTF-8'
+        request_template: 'delete_device_discovery_rules.tpl'
+        response_type: 'application/vnd.net.juniper.space.device-management.delete-device-discovery-rules-response+xml;version=6'
+    trigger_device_discovery_rule:
+        name: 'discover-devices'
+        request_type: 'application/vnd.net.juniper.space.device-management.discover-devices-request+xml;version=6;charset=UTF-8'
+        request_template: 'trigger_device_discovery_rule.tpl'
+        response_type: 'application/vnd.net.juniper.space.job-management.task+xml;version=1'
+
 ...
