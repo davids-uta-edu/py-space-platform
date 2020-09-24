@@ -1,0 +1,6 @@
+---
+services:
+    address_management:
+        service_name: 'address-management'
+        url: '/api/juniper/sd/address-management'
+...
